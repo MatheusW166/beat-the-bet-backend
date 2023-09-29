@@ -1,0 +1,25 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "moduleDirectories": [
+    "node_modules",
+    "src"
+  ],
+  "transform": {
+    ".+\\.ts$": "ts-jest"
+  },
+  "testMatch": [
+    "<rootDir>/test/**/*.(test*|spec*).ts"
+  ],
+  "setupFiles": [
+    "<rootDir>/test/setup-envs.ts"
+  ],
+  "setupFilesAfterEnv": [
+    "<rootDir>/test/setup-files-after-env.ts"
+  ],
+  "moduleNameMapper": {
+    "@/(.*)": "<rootDir>/src/$1",
+    "@test/(.*)": "<rootDir>/test/$1"
+  },
+  "restoreMocks": true
+}

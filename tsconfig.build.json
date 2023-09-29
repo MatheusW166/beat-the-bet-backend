@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "prisma",
+    "./test",
+    "./coverage",
+    "./dist",
+    "__tests__",
+    "jest.*"
+  ]
+}

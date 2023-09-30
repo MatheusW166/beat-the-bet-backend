@@ -9,7 +9,7 @@
     ".+\\.ts$": "ts-jest"
   },
   "testMatch": [
-    "<rootDir>/test/**/*.(test*|spec*).ts"
+    "<rootDir>/test/**/*.(*test|*spec).ts"
   ],
   "setupFiles": [
     "<rootDir>/test/setup-envs.ts"

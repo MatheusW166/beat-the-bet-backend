@@ -1,7 +1,7 @@
 import httpStatus from 'http-status-codes';
 
 export type DefaultError = {
-  details: string[];
+  details?: string;
   status: number;
 };
 
@@ -9,14 +9,28 @@ export type UnknownError = DefaultError | Error;
 
 export class NotFoundError implements DefaultError {
   constructor(
-    readonly details: string[],
+    readonly details?: string,
     readonly status = httpStatus.NOT_FOUND,
   ) {}
 }
 
 export class ConflictError implements DefaultError {
   constructor(
-    readonly details: string[],
+    readonly details?: string,
     readonly status = httpStatus.CONFLICT,
+  ) {}
+}
+
+export class UnprocessableEntityError implements DefaultError {
+  constructor(
+    readonly details?: string,
+    readonly status = httpStatus.UNPROCESSABLE_ENTITY,
+  ) {}
+}
+
+export class ForbiddenError implements DefaultError {
+  constructor(
+    readonly details?: string,
+    readonly status = httpStatus.FORBIDDEN,
   ) {}
 }

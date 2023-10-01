@@ -97,4 +97,9 @@ async function finishGameBets(gameId: number) {
   return Promise.all(promises);
 }
 
-export const betService = { create, finishGameBets };
+export const betService = {
+  create,
+  finishGameBets,
+  gameBetsResume,
+  calcAmountWon,
+};

@@ -1,15 +1,11 @@
 import { CreateParticipantDTO } from '@/dtos';
-import {
-  ForbiddenError,
-  NotFoundError,
-  UnprocessableEntityError,
-} from '@/errors';
+import { ForbiddenError, NotFoundError } from '@/errors';
 import { participantRepository } from '@/repositories';
 
 const MIN_BALANCE = 1000;
 
 async function create(participant: CreateParticipantDTO) {
-  if (participant.balance < MIN_BALANCE) throw new UnprocessableEntityError();
+  if (participant.balance < MIN_BALANCE) throw new ForbiddenError();
   return participantRepository.create(participant);
 }
 

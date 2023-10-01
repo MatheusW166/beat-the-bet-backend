@@ -7,10 +7,10 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
-        "*"
+        "./src/*"
       ],
       "@test/*": [
         "./test/*"
@@ -18,6 +18,9 @@
     }
   },
   "ts-node": {
-    "esm": true
+    "esm": true,
+    "require": [
+      "tsconfig-paths/register"
+    ]
   }
 }

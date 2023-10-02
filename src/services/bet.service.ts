@@ -77,9 +77,8 @@ function gameBetsResume(bets: Bet[], game: Game) {
   };
 }
 
-async function finishGameBets(gameId: number) {
-  const game = await gameService.findByIdOrThrow(gameId);
-  const bets = await betRepository.findByGameId(gameId);
+async function finishGameBets(game: Game) {
+  const bets = await betRepository.findByGameId(game.id);
 
   const { betsAmount, loserBets, winnerBets, winnersAmount } = gameBetsResume(
     bets,

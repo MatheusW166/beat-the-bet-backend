@@ -10,8 +10,9 @@ async function create(game: CreateGameDTO) {
 async function finishGame(id: number, game: UpdateGameDTO) {
   const gameFound = await findByIdOrThrow(id);
   if (gameFound.isFinished) throw new ForbiddenException();
-  await betService.finishGameBets(id);
-  return gameRepository.update(id, game, true);
+  const updatedGame = await gameRepository.update(id, game, true);
+  await betService.finishGameBets(updatedGame);
+  return updatedGame;
 }
 
 async function findAll() {

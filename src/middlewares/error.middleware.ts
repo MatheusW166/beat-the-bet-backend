@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import httpStatus from 'http-status-codes';
 import { HttpException } from '@/errors';
 
 function handle(
@@ -18,7 +17,8 @@ function handle(
     return;
   }
 
-  res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  const defaultException = new HttpException({});
+  res.status(defaultException.status).send(defaultException);
 }
 
 export const errorMiddleware = { handle };

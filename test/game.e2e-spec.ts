@@ -128,7 +128,6 @@ describe('GameController (e2e)', () => {
 
       const winnerBetsUpdated = await prisma.bet.findMany({
         where: { id: { in: winnerBets.map((bet) => bet.id) } },
-        include: { Participant: true },
       });
       winnerBetsUpdated.forEach((bet) => {
         const oldBet = winnerBets.find(({ id }) => bet.id === id);
@@ -144,7 +143,6 @@ describe('GameController (e2e)', () => {
 
       const loserBetsUpdated = await prisma.bet.findMany({
         where: { id: { in: loserBets.map((bet) => bet.id) } },
-        include: { Participant: true },
       });
       loserBetsUpdated.forEach((bet) => {
         expect(bet).toMatchObject({

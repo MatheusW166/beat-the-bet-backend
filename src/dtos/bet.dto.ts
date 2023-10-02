@@ -15,9 +15,9 @@ export type CreateBetDTO = {
 };
 
 export const createBetSchema = Joi.object<CreateBetDTO>({
-  homeTeamScore: Joi.number().integer().required(),
-  awayTeamScore: Joi.number().integer().required(),
-  amountBet: Joi.number().integer().required(),
-  gameId: Joi.number().integer().required(),
-  participantId: Joi.number().integer().required(),
+  homeTeamScore: Joi.number().integer().greater(-1).required(),
+  awayTeamScore: Joi.number().integer().greater(-1).required(),
+  amountBet: Joi.number().integer().greater(-1).required(),
+  gameId: Joi.number().integer().positive().required(),
+  participantId: Joi.number().integer().positive().required(),
 });

@@ -24,8 +24,8 @@ function create(bet?: Partial<Bet>) {
     amountBet: faker.number.int({ min: 1000, max: 10000 }),
     status: faker.helpers.enumValue(BetStatus),
     amountWon: faker.number.int({ min: 1000, max: 10000 }),
-    gameId: faker.number.int({ min: 0, max: 100 }),
-    participantId: faker.number.int({ min: 0, max: 100 }),
+    gameId: faker.number.int({ min: 1, max: 100 }),
+    participantId: faker.number.int({ min: 1, max: 100 }),
     ...bet,
   };
 }
@@ -80,6 +80,7 @@ async function persistMany({
     });
     data.push(bet);
   });
+  await prisma.bet.createMany({ data });
   const bets = await prisma.bet.findMany({ where: { ...score } });
   return bets.map((bet) => datesToString(bet));
 }

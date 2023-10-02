@@ -6,8 +6,8 @@ export type UpdateGameDTO = {
 };
 
 export const updateGameSchema = Joi.object<UpdateGameDTO>({
-  homeTeamScore: Joi.number().integer().required(),
-  awayTeamScore: Joi.number().integer().required(),
+  homeTeamScore: Joi.number().integer().greater(-1).required(),
+  awayTeamScore: Joi.number().integer().greater(-1).required(),
 });
 
 export type CreateGameDTO = {

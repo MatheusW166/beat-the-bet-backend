@@ -14,13 +14,6 @@ export class NotFoundError implements DefaultError {
   ) {}
 }
 
-export class ConflictError implements DefaultError {
-  constructor(
-    readonly details?: string,
-    readonly status = httpStatus.CONFLICT,
-  ) {}
-}
-
 export class UnprocessableEntityError implements DefaultError {
   constructor(
     readonly details?: string,

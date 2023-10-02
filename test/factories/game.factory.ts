@@ -25,10 +25,12 @@ function updateDTO(game?: Partial<UpdateGameDTO>) {
   return { awayTeamScore, homeTeamScore };
 }
 
-function persist(game?: Partial<Game>) {
-  return prisma.game.create({
-    data: create(game),
-  });
+async function persist(game?: Partial<Game>) {
+  return datesToString(
+    await prisma.game.create({
+      data: create(game),
+    }),
+  );
 }
 
 async function persistMany(quantity?: number) {

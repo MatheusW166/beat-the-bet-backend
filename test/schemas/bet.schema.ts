@@ -8,5 +8,5 @@ export const betSchema = {
   gameId: expect.any(Number),
   participantId: expect.any(Number),
   status: expect.any(String),
-  amountWon: expect.any(null),
+  amountWon: expect.any(Number),
 };

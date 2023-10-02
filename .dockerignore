@@ -1,0 +1,13 @@
+.env.example
+node_modules
+refs
+coverage
+test
+.eslint*
+.prettier*
+jest*
+nodemon*
+README*
+.gitignore
+dist
+build

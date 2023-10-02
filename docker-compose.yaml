@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg:/var/lib/postgresql/data
+    networks:
+      - btbet_network
+
+  backend:
+    build: .
+    container_name: backend
+    ports:
+      - 5000:5000
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - btbet_network
+
+volumes:
+  pg:
+
+
+networks:
+  btbet_network:

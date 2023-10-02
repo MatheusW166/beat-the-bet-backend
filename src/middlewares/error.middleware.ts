@@ -1,13 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status-codes';
-import { DefaultError, UnknownError } from '@/errors';
-
-function isDefaultError(error: UnknownError): error is DefaultError {
-  return (error as DefaultError).status !== undefined;
-}
+import { HttpException } from '@/errors';
 
 function handle(
-  error: UnknownError,
+  error: Error | HttpException,
   _req: Request,
   res: Response,
   next: NextFunction,
@@ -17,8 +13,8 @@ function handle(
     return;
   }
 
-  if (isDefaultError(error)) {
-    res.status(error.status).send(error.details);
+  if (error instanceof HttpException) {
+    res.status(error.status).send(error);
     return;
   }
 

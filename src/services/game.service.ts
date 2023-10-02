@@ -1,5 +1,5 @@
 import { CreateGameDTO, UpdateGameDTO } from '@/dtos';
-import { ForbiddenError, NotFoundError } from '@/errors';
+import { ForbiddenException, NotFoundException } from '@/errors';
 import { gameRepository } from '@/repositories';
 import { betService } from '.';
 
@@ -9,7 +9,7 @@ async function create(game: CreateGameDTO) {
 
 async function finishGame(id: number, game: UpdateGameDTO) {
   const gameFound = await findByIdOrThrow(id);
-  if (gameFound.isFinished) throw new ForbiddenError();
+  if (gameFound.isFinished) throw new ForbiddenException();
   await betService.finishGameBets(id);
   return gameRepository.update(id, game, true);
 }
@@ -20,7 +20,7 @@ async function findAll() {
 
 async function findByIdOrThrow(id: number) {
   const game = await gameRepository.findById(id);
-  if (!game) throw new NotFoundError();
+  if (!game) throw new NotFoundException();
   return game;
 }
 

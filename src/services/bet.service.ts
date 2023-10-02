@@ -1,6 +1,6 @@
 import { CreateBetDTO } from '@/dtos';
 import { gameService, participantService } from '@/services';
-import { ForbiddenError } from '@/errors';
+import { ForbiddenException } from '@/errors';
 import { betRepository } from '@/repositories';
 import { Bet, Game } from '@prisma/client';
 
@@ -10,10 +10,10 @@ async function create(bet: CreateBetDTO) {
   const { participantId, gameId } = bet;
 
   const participant = await participantService.findByIdOrThrow(participantId);
-  if (bet.amountBet > participant.balance) throw new ForbiddenError();
+  if (bet.amountBet > participant.balance) throw new ForbiddenException();
 
   const game = await gameService.findByIdOrThrow(gameId);
-  if (game.isFinished) throw new ForbiddenError();
+  if (game.isFinished) throw new ForbiddenException();
 
   await participantService.decrementBalance(participantId, bet.amountBet);
   return betRepository.create(bet);

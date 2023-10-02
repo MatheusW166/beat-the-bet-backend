@@ -1,29 +1,39 @@
 import httpStatus from 'http-status-codes';
 
-export type DefaultError = {
-  details?: string;
-  status: number;
+type HttpExceptionDetails = string | string[];
+
+type HttpExceptionProps = {
+  message?: string;
+  status?: number;
+  details?: HttpExceptionDetails;
 };
 
-export type UnknownError = DefaultError | Error;
+export class HttpException {
+  public readonly status: number;
+  public readonly details: string | string[];
+  public readonly message: string;
 
-export class NotFoundError implements DefaultError {
-  constructor(
-    readonly details?: string,
-    readonly status = httpStatus.NOT_FOUND,
-  ) {}
+  constructor({ status, details }: HttpExceptionProps) {
+    this.status = status ?? 500;
+    this.message = httpStatus.getStatusText(this.status);
+    this.details = details ?? [];
+  }
 }
 
-export class UnprocessableEntityError implements DefaultError {
-  constructor(
-    readonly details?: string,
-    readonly status = httpStatus.UNPROCESSABLE_ENTITY,
-  ) {}
+export class NotFoundException extends HttpException {
+  constructor(details?: HttpExceptionDetails) {
+    super({ status: httpStatus.NOT_FOUND, details });
+  }
 }
 
-export class ForbiddenError implements DefaultError {
-  constructor(
-    readonly details?: string,
-    readonly status = httpStatus.FORBIDDEN,
-  ) {}
+export class UnprocessableEntityException extends HttpException {
+  constructor(details?: HttpExceptionDetails) {
+    super({ status: httpStatus.UNPROCESSABLE_ENTITY, details });
+  }
+}
+
+export class ForbiddenException extends HttpException {
+  constructor(details?: HttpExceptionDetails) {
+    super({ status: httpStatus.FORBIDDEN, details });
+  }
 }

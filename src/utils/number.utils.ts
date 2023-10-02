@@ -1,9 +1,9 @@
-import { UnprocessableEntityError } from '@/errors';
+import { UnprocessableEntityException } from '@/errors';
 
 export function validateIdOrThrow(id: string | number) {
   const idN = Number(id);
   if (isNaN(idN) || idN < 0) {
-    throw new UnprocessableEntityError('ID is invalid');
+    throw new UnprocessableEntityException('ID is invalid');
   }
   return idN;
 }

@@ -13,7 +13,7 @@
     "migrate:deploy": "prisma migrate deploy",
     "migrate:dev": "npm run load:env:dev -- prisma migrate dev",
     "migrate:test": "npm run load:env:test -- prisma migrate dev",
-    "test:e2e": "npm run load:env:test -- jest -- --passWithNoTests --runInBand",
+    "test": "npm run load:env:test -- jest -- --passWithNoTests --runInBand",
     "test:coverage": "npm run load:env:test -- jest -- --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",
     "dev": "npm run load:env:dev -- nodemon ./src/index.ts"
   },
